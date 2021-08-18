@@ -6,7 +6,7 @@ services:
 
 # build for test
 before_install:
-  - docker build -t anlakgns/react-test -f ./client/Dockerfile.dev .
+  - docker build -t anlakgns/react-test -f ./client/Dockerfile.dev ./client
 
 # run test
 
