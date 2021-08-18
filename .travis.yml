@@ -11,7 +11,7 @@ before_install:
 # run test
 
 script:
-  - docker run -e CI=true USERNAME/react-test npm test
+  - docker run -e CI=true anlakgns/react-test npm test
 # build for production
 after_sucess:
   - docker build -t anlakgns/multi-client ./client
