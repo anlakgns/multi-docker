@@ -19,7 +19,7 @@ after_sucess:
   - docker build -t anlakgns/multi-server ./server
   - docker build -t anlakgns/multi-worker ./worker
 
-  # Login to the Docker CLII
+  # Login to the Docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
   # Take those images and push them to docker hub
@@ -27,4 +27,3 @@ after_sucess:
   - docker push anlakgns/multi-nginx
   - docker push anlakgns/multi-server
   - docker push anlakgns/multi-worker
-
