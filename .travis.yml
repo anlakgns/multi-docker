@@ -9,9 +9,9 @@ before_install:
   - docker build -t anlakgns/react-test -f ./client/Dockerfile.dev .
 
 # run test
-script:
-  - docker run anlakgns/react-test npm test -- --covarage
 
+script:
+  - docker run -e CI=true USERNAME/react-test npm test
 # build for production
 after_sucess:
   - docker build -t anlakgns/multi-client ./client
