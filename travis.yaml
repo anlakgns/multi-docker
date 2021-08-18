@@ -1,0 +1,29 @@
+sudo: required
+
+#Specify docker as a dependecy
+services:
+  - docker
+
+# build for test
+before_install:
+  - docker build -t anlakgns/react-test -f ./client/Dockerfile.dev .
+
+# run test
+script:
+  - docker run anlakgns/react-test npm test -- --covarage
+
+# build for production
+after_sucess:
+  - docker build -t anlakgns/multi-client ./client
+  - docker build -t anlakgns/multi-nginx ./nginx
+  - docker build -t anlakgns/multi-server ./server
+  - docker build -t anlakgns/multi-worker ./worker
+
+  # Login to the Docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+  # Take those images and push them to docker hub
+  - docker push anlakgns/multi-client
+  - docker push anlakgns/multi-nginx
+  - docker push anlakgns/multi-server
+  - docker push anlakgns/multi-worker
